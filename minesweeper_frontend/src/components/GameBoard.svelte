@@ -2,7 +2,11 @@
   import { createEventDispatcher, onMount } from "svelte";
   import { revealTile, toggleFlag, checkGameStatus } from "../lib/game";
 
-  export let board;
+  /**
+   * GameBoard expects a 'board' prop (2D array). We add defensive guards to avoid
+   * runtime errors if board is undefined/null before Svelte reactivity kicks in.
+   */
+  export let board = [[]];
   export let gameStatus;
 
   const dispatch = createEventDispatcher();
@@ -12,8 +16,16 @@
   let revealed = 0;
   let internalStatus = "ready"; // ready, playing, won, lost
 
+  /**
+   * Initializes the local grid from the board prop if it's a valid matrix.
+   * Always sets grid to an array of arrays (even if empty), never undefined.
+   */
   function setupBoard() {
-    grid = board.map(row => row.map(cell => ({ ...cell })));
+    if (Array.isArray(board) && board.length && Array.isArray(board[0])) {
+      grid = board.map(row => row.map(cell => ({ ...cell })));
+    } else {
+      grid = [[]]; // fallback so .map doesn't throw
+    }
     flagged = grid.flat().filter(c => c.flagged).length;
     revealed = grid.flat().filter(c => c.revealed).length;
     internalStatus = "ready";

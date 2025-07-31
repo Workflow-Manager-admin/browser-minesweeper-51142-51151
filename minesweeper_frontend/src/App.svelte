@@ -7,7 +7,8 @@
   let customRows = defaultDifficulty.rows;
   let customCols = defaultDifficulty.cols;
   let customMines = defaultDifficulty.mines;
-  let board, mineCount, gameStatus, revealedCount, flaggedCount, timer, intervalId;
+  // Default the board state to a valid matrix, before first resetGame runs
+  let board = [[]], mineCount = 0, gameStatus = "ready", revealedCount = 0, flaggedCount = 0, timer, intervalId;
   let startTime, elapsed = 0;
 
   // Status: "ready", "playing", "won", "lost"
