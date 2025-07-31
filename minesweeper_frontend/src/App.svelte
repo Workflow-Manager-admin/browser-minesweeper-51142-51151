@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import GameBoard from "./components/GameBoard.svelte";
   import { difficulties, defaultDifficulty, newBoard } from "./lib/game";
-  import { writable } from "svelte/store";
 
   let difficulty = defaultDifficulty;
   let customRows = defaultDifficulty.rows;
