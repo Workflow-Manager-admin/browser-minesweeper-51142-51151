@@ -74,6 +74,16 @@
         class="cell {cell.revealed ? 'revealed' : ''} {cell.flagged ? 'flagged' : ''} {internalStatus === 'lost' && cell.mine ? 'exploded' : ''}"
         on:click={() => handleTileClick(rIdx, cIdx)}
         on:contextmenu={(e) => handleRightClick(e, rIdx, cIdx)}
+        on:keydown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleTileClick(rIdx, cIdx);
+          } else if (e.key === "f" || e.key === "F") {
+            // allow flag/unflag by keyboard
+            e.preventDefault();
+            handleRightClick(e, rIdx, cIdx);
+          }
+        }}
         aria-label={cell.mine ? "Mine" : `cell`}
         tabindex="0"
         role="button"
