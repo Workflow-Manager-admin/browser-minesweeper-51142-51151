@@ -1,0 +1,4 @@
+{
+    "command": "npm install",
+    "working_directory": "/home/kavia/workspace/code-generation/browser-minesweeper-51142-51151/minesweeper_frontend"
+}
